@@ -1,0 +1,13 @@
+name: 'Get next helm version'
+description: 'Returns the next helm version depending on BRANCH, BUILD_NUMBER, TAG'
+inputs:
+  latestTag:  # id of input
+    description: 'last tag'
+    required: false
+    default: 'v0.0.1'
+outputs:
+  helmVersion: # id of output
+    description: 'The next helm version'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
