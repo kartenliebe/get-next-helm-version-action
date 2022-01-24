@@ -11508,7 +11508,13 @@ const semver  = __nccwpck_require__(1383);
 
 try {
   const tag = core.getInput('latestTag');
-  const { runNumber, payload } = github.context;
+  const buildNumber = core.getInput('buildNumber');
+  const bumpMaster = core.getInput('bumpMaster');
+  let { runNumber, payload } = github.context;
+
+  if (buildNumber !== "") {
+    runNumber = buildNumber;
+  }
 
   const isPR = !!payload.pull_request
   const prNumber = isPR ? payload.pull_request.number : null;
@@ -11521,6 +11527,9 @@ try {
 
   if (branchName === 'master') {
     core.debug('Branch master');
+    if (bumpMaster === "true") {
+      const nextHelmVersion = semver.inc(currentVersion, 'prerelease', `${runNumber}`)
+    }
     core.setOutput('helmVersion', currentVersion);
     return;
   }
@@ -11552,6 +11561,7 @@ try {
 } catch (error) {
   core.setFailed(error.message);
 }
+
 })();
 
 module.exports = __webpack_exports__;
