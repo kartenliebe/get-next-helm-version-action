@@ -5,6 +5,14 @@ inputs:
     description: 'last tag'
     required: false
     default: 'v0.0.1'
+  buildNumber:
+    description: 'build number'
+    required: false
+    default: ''
+  bumpMaster:
+    description: 'bump if master branch'
+    required: false
+    default: 'false'
 outputs:
   helmVersion: # id of output
     description: 'The next helm version'
