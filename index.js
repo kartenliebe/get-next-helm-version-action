@@ -23,8 +23,8 @@ try {
 
   if (branchName === 'master') {
     core.debug('Branch master');
-    if (bumpMaster === "true") {
-      const nextHelmVersion = semver.inc(currentVersion, 'patch', `${runNumber}`)
+    if (bumpMaster === 'true') {
+      const nextHelmVersion = semver.inc(currentVersion, 'patch')
       core.setOutput('helmVersion', nextHelmVersion);
       return;
     }
