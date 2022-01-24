@@ -11512,7 +11512,7 @@ try {
   const bumpMaster = core.getInput('bumpMaster');
   let { runNumber, payload } = github.context;
 
-  if (buildNumber !== "") {
+  if (buildNumber !== "" && buildNumber !== undefined) {
     runNumber = buildNumber;
   }
 
@@ -11527,8 +11527,10 @@ try {
 
   if (branchName === 'master') {
     core.debug('Branch master');
-    if (bumpMaster === "true") {
-      const nextHelmVersion = semver.inc(currentVersion, 'prerelease', `${runNumber}`)
+    if (bumpMaster === 'true') {
+      const nextHelmVersion = semver.inc(currentVersion, 'patch')
+      core.setOutput('helmVersion', nextHelmVersion);
+      return;
     }
     core.setOutput('helmVersion', currentVersion);
     return;
