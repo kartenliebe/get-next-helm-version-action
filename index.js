@@ -6,7 +6,7 @@ try {
   const tag = core.getInput('latestTag');
   const buildNumber = core.getInput('buildNumber');
   const bumpMaster = core.getInput('bumpMaster');
-  let { run_number: runNumber, payload } = github.context;
+  let { runNumber, payload } = github.context;
 
   if (!isNaN(buildNumber)) {
     runNumber = buildNumber;
