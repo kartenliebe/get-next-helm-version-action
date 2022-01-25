@@ -8,7 +8,7 @@ try {
   const bumpMaster = core.getInput('bumpMaster');
   let { runNumber, payload } = github.context;
 
-  if (!isNaN(buildNumber)) {
+  if (buildNumber !== '' && !isNaN(buildNumber)) {
     runNumber = buildNumber;
   }
 
