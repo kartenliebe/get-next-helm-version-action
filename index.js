@@ -6,9 +6,9 @@ try {
   const tag = core.getInput('latestTag');
   const buildNumber = core.getInput('buildNumber');
   const bumpMaster = core.getInput('bumpMaster');
-  let { runNumber, payload } = github.context;
+  let { run_number: runNumber, payload } = github.context;
 
-  if (buildNumber !== "" && buildNumber !== undefined) {
+  if (!isNaN(buildNumber)) {
     runNumber = buildNumber;
   }
 
@@ -46,7 +46,7 @@ try {
     return;
   }
 
-  if (branchName.match('^(feature|bugfix)')) {
+  if (branchName.match('^(feature|bugfix|renovate)')) {
     core.debug('feature/bugfix branch');
     const preReleaseName = branchName.replace(/\//g, '-')
     const nextHelmVersion = semver.inc(currentVersion, 'prerelease', `${preReleaseName}-${runNumber}`)
@@ -54,8 +54,7 @@ try {
     return;
   }
 
-
-  throw Error ('Branch is not allowed to get builded')
+  throw Error ('Branch is not allowed to get built')
 } catch (error) {
   core.setFailed(error.message);
 }
