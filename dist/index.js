@@ -11510,9 +11510,9 @@ try {
   const tag = core.getInput('latestTag');
   const buildNumber = core.getInput('buildNumber');
   const bumpMaster = core.getInput('bumpMaster');
-  let { run_number: runNumber, payload } = github.context;
+  let { runNumber, payload } = github.context;
 
-  if (!isNaN(buildNumber)) {
+  if (buildNumber !== '' && !isNaN(buildNumber)) {
     runNumber = buildNumber;
   }
 
@@ -11525,8 +11525,8 @@ try {
     throw Error('Failed to extract latest release')
   }
 
-  if (branchName === 'master') {
-    core.debug('Branch master');
+  if (branchName === 'master' || branchName === 'main') {
+    core.debug('Branch master or main');
     if (bumpMaster === 'true') {
       const nextHelmVersion = semver.inc(currentVersion, 'patch')
       core.setOutput('helmVersion', nextHelmVersion);
