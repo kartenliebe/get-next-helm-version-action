@@ -11525,8 +11525,8 @@ try {
     throw Error('Failed to extract latest release')
   }
 
-  if (branchName === 'master') {
-    core.debug('Branch master');
+  if (branchName === 'master' || branchName === 'main') {
+    core.debug('Branch master or main');
     if (bumpMaster === 'true') {
       const nextHelmVersion = semver.inc(currentVersion, 'patch')
       core.setOutput('helmVersion', nextHelmVersion);
