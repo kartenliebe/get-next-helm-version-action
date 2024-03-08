@@ -17,5 +17,5 @@ outputs:
   helmVersion: # id of output
     description: 'The next helm version'
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'
