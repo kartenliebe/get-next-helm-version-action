@@ -54,7 +54,7 @@ try {
     return;
   }
 
-  throw Error ('Branch is not allowed to get built')
+  throw Error ('Branch "' + branchName + '" is not allowed to get built')
 } catch (error) {
   core.setFailed(error.message);
 }
