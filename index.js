@@ -46,7 +46,7 @@ try {
     return;
   }
 
-  if (branchName.match('^(feature|bugfix|renovate)')) {
+  if (branchName.match('^(feature|bugfix|renovate|staging)')) {
     core.debug('feature/bugfix branch');
     const preReleaseName = branchName.replace(/\//g, '-')
     const nextHelmVersion = semver.inc(currentVersion, 'prerelease', `${preReleaseName}-${runNumber}`)
